@@ -1,15 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const config = require('./config');
-const FakeDb = require('./fake-db')
+const FakeDb = require('./fake-db');
+const bodyParser = require('body-parser');
 
-const productRoutes = require('./routes/products')
+const productRoutes = require('./routes/products');
+const userRoutes = require('./routes/users.js');
+
 const path = require('path');
 
 mongoose.connect(config.DB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify: false,
   useCreateIndex: true
 }).then(
   () => {
@@ -21,8 +23,10 @@ mongoose.connect(config.DB_URI, {
 );
 
 const app = express()
+app.use(bodyParser.json())
 
 app.use('/api/v1/products', productRoutes)
+app.use('/api/v1/users', userRoutes)
 
 if(process.env.NODE_ENV === 'production') {
   const appPath = path.join( __dirname, '..', 'dist', 'reservation-app')
@@ -35,7 +39,8 @@ if(process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || '3001'
 
+
 app.listen(PORT, function() {
-     console.log('I am running!')
+     console.log('I am running!' + PORT)
 })
 
