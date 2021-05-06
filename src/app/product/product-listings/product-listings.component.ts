@@ -17,15 +17,13 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
 
     const productsObservable = this.productService.getProducts()
-    productsObservable.subscribe(
-      (data) => {
-        this.products = data
-        console.log('次のデータが出力されました:' + data )
-        debugger
-      },
-      (err) => {console.error('次のエラーが発生しました:' + err)}
-    );
-
+      productsObservable.subscribe(
+        (data) => {
+          this.products = data
+          console.log('次のデータが出力されました:' + data )
+        },
+        (err) => {console.error('次のエラーが発生しました:' + err)}
+      );
   }
 
 }

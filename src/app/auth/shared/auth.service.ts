@@ -13,7 +13,12 @@ export class AuthService {
   //   return this.http.get('/api/v1/products')
   // }
 
-  // getProductId( productId : String): Observable<any>{
-  //   return this.http.get('/api/v1/products/' + productId)
-  // }
+  register( UserDate : any): Observable<any>{
+    return this.http.post('/api/v1/users/register', UserDate)
+  }
+
+  login( UserDate : any): Observable<any>{
+    return this.http.post('/api/v1/users/login', UserDate)
+  }
+
 }
