@@ -3,10 +3,6 @@ const router = express.Router();
 const Product = require('../model/product');
 const UserCtrl = require('../controllers/user')
 
-router.get('/secret',UserCtrl.authMiddleware , function(req, res){
-  return res.json({"secret": true});
-})
-
 router.get('', function(req, res){
   Product.find({}, function(err, foundProduct){
     res.json(foundProduct)
